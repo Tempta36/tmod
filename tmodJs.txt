@@ -1,0 +1,27 @@
+tmod.js  用于产生模板文件（可用于模态框，对话框）
+
+
+安装
+npm install -g tmod.js@版本编号
+npm install --save--dev tmod.js@版本编号
+
+package.json配置
+"script":{
+	"test":"echo \"Error:no test soecified\" && exit 1",
+	"dev":"tmod ./tpl --output ./build"	
+}
+
+编译生成template.js
+npm init
+npm run dev
+
+js中引入如下js(使用jquery)
+var getTmpl=function(templateName,data){
+	if((typeof template(templateName,data) == "function")){
+		return template(templateName,data)();
+	}
+	return template(templateName,data);
+};
+$.fn.tmpl=function(templateName,data){
+	return $(this).html.call(this,getTmpl(templateName,data));
+};
